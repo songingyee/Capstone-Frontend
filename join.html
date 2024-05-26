@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 nameInput.setAttribute("placeholder", "ex) 홍길동");
             }
             if (pwdInput) {
-                pwdInput.setAttribute("placeholder", "영문+숫자+특수문자 조합");
+                pwdInput.setAttribute("placeholder", "영문+숫자 조합");
             }
             if (pwdCheckInput) {
                 pwdCheckInput.setAttribute("placeholder", "");
@@ -256,14 +256,48 @@ document.addEventListener("DOMContentLoaded", function() {
          <input id="myname" type="text" name="name" placeholder="ex) 홍길동" maxlength="10">
        </td>
     </tr>
-    
     <tr>
+        <td class="col1">성별<span class="redstar">*</span></td>
+        <td>
+            <input type="radio" name="gender" value="yes"> 남
+            <input type="radio" name="gender" value="no"> 여
+        </td>
+    </tr>
+    <tr>
+        <td class="col1">나이<span class="redstar">*</span></td>
+        <td class="col2">
+            <select id="age" name="age">
+                <option>선택</option>
+                <option>10~14세</option>
+                <option>15~19세</option>
+                <option>20~24세</option>
+                <option>25~29세</option>
+                <option>30~34세</option>
+                <option>35~39세</option>
+                <option>40~44세</option>
+                <option>45~49세</option>
+                <option>50~54세</option>
+                <option>55~59세</option>
+                <option>60세 이상</option>
+            </select>
+        </td>
+     </tr>
+     <tr>
+        <td class="col1">사이즈<span class="redstar">*</span></td>
+        <td class="col2">키
+          <input id="height" type="text" name="name" placeholder="ex) 167cm" maxlength="10">
+          몸무게
+            <input id="weight" type="text" name="name" placeholder="ex) 57kg" maxlength="10">
+            허리
+          <input id="waist" type="text" name="name" placeholder="ex) 27inch" maxlength="10">
+        </td>
+     </tr>
+     <tr>
         <td class="col1">이벤트 정보<span class="redstar">*</span></td>
         <td>
             <input type="radio" name="event_info" value="yes"> 수신
             <input type="radio" name="event_info" value="no"> 비수신
         </td>
-    </tr>
   </table>
   </div>
   <div class="spacer1"></div> <!-- 세로 간격을 위한 요소 -->
