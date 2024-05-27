@@ -68,8 +68,7 @@ function checkPasswords() { // 비밀번호 비교 함수
     var message = document.getElementById("passwordMessage"); // 메시지 출력 위치
 if (pwd1.length > 0 && pwd2.length > 0) {    
     if (pwd1 === pwd2) { // 비밀번호가 일치할 경우
-        message.textContent = "비밀번호가 일치합니다."; // 메시지 내용
-        message.style.color = "green"// 메시지 색상
+        message.textContent = ""; // 메시지 내용
     } else { // 비밀번호가 일치하지 않을 경우
         message.textContent = "⚠️ 비밀번호가 일치하지 않습니다."; // 메시지 내용
         message.style.color = "red"; // 메시지 색상
@@ -243,6 +242,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             console.log('Success:', data);
             // 사용자에게 성공 메시지 표시 등
+            alert('회원가입 되었습니다.');
+            window.location.href = 'login.html';
         })
         .catch(error => {
             console.error('Error:', error);
