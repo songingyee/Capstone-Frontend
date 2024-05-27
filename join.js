@@ -141,9 +141,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // 확인 버튼 클릭 시
     document.querySelector('.but4').addEventListener('click', function() {
         // 폼 데이터 수집
-        const email = document.getElementById('email').value;
+
+        const emailUser = document.getElementById('email').value;
+        const emailDomain = document.getElementById('optmailid').value;
+        const email = emailUser + "@" + emailDomain;
         const password = document.getElementById('pwd').value;
-        const name = document.getElementById('myname').value;
+        const username = document.getElementById('myname').value;
         const gender = document.querySelector('input[name="gender"]:checked').value;
         const age = document.getElementById('age').value;
         const height = document.getElementById('height').value;
@@ -154,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const userData = {
             email: email,
             password: password,
-            name: name,
+            username: username,
             gender: gender,
             age: age,
             height: height,
@@ -162,9 +165,9 @@ document.addEventListener('DOMContentLoaded', function() {
             waist: waist
         };
 
-        // 서버로 전송 (목 서버 URL 사용)
-    // 서버로 전송 (목 서버 URL 사용)
-    fetch('https://e2f5eafc-c6e1-4743-95b4-7c57406f6815.mock.pstmn.io/join', { // 실제 목 서버 URL로 대체
+        
+    // 서버로 전송
+    fetch('http://localhost:8080/signUp', { // 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
