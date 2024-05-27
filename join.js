@@ -149,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const height = document.getElementById('height').value;
         const weight = document.getElementById('weight').value;
         const waist = document.getElementById('waist').value;
-        const eventInfo = document.querySelector('input[name="event_info"]:checked').value;
 
         // JSON 형식으로 변환
         const userData = {
@@ -160,8 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
             age: age,
             height: height,
             weight: weight,
-            waist: waist,
-            event_info: eventInfo
+            waist: waist
         };
 
         // 서버로 전송 (목 서버 URL 사용)
