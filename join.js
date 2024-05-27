@@ -134,14 +134,80 @@ function moveToMain() {
     window.location.href = 'main.html';
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////api
-
+////////////////////////////////////////////////////////////////////////////////////////////////폼 입력 제한
 
 document.addEventListener('DOMContentLoaded', function() {
+    // 이메일 도메인 업데이트 함수
+    function updateEmailDomain() {
+        var selectElement = document.getElementById("selectcom");
+        var selectedDomain = selectElement.value;
+        var emailDomainInput = document.getElementById("optmailid");
+
+        if (selectedDomain === "sel") {
+            emailDomainInput.readOnly = false;
+            emailDomainInput.value = "";
+        } else {
+            emailDomainInput.readOnly = true;
+            emailDomainInput.value = selectedDomain;
+        }
+    }
+
+    // 특정 입력 필드에 영어와 숫자만 허용
+    function allowOnlyAlphanumeric(event) {
+        const input = event.target;
+        input.value = input.value.replace(/[^a-zA-Z0-9]/g, '');
+    }
+
+    // 특정 입력 필드에 이메일 도메인 형식만 허용
+    function allowEmailDomainFormat(event) {
+        const input = event.target;
+        input.value = input.value.replace(/[^a-zA-Z0-9.]/g, '');
+    }
+
+    // 특정 입력 필드에 한국어와 영어만 허용
+    function allowKoreanAndEnglish(event) {
+        const input = event.target;
+        input.value = input.value.replace(/[^a-zA-Zㄱ-ㅎ가-힣]/g, '');
+    }
+
+    // 특정 입력 필드에 숫자만 허용
+    function allowOnlyNumeric(event) {
+        const input = event.target;
+        input.value = input.value.replace(/[^0-9]/g, '');
+    }
+
+    // 이메일 사용자 부분에 영어와 숫자만 허용
+    document.getElementById('email').addEventListener('input', allowOnlyAlphanumeric);
+
+    // 이메일 도메인 부분에 형식 맞추기
+    document.getElementById('optmailid').addEventListener('input', allowEmailDomainFormat);
+
+    // 비밀번호 부분 
+    document.getElementById('pwd').addEventListener('input', allowOnlyAlphanumeric);
+
+    // 비밀번호 확인 부분
+    document.getElementById('pwdCheck').addEventListener('input', allowOnlyAlphanumeric);
+
+    // 이름 입력 부분에 한국어와 영어만 허용
+    document.getElementById('myname').addEventListener('input', allowKoreanAndEnglish);
+    
+    // 키, 몸무게, 허리 입력 필드에 숫자만 허용
+    document.getElementById('height').addEventListener('input', allowOnlyNumeric);
+
+    document.getElementById('weight').addEventListener('input', allowOnlyNumeric);
+    
+    document.getElementById('waist').addEventListener('input', allowOnlyNumeric);
+
+
+    // 이메일 도메인 업데이트 이벤트 리스너
+    document.getElementById('selectcom').addEventListener('change', updateEmailDomain);
+    
+
+    
+///////////////////////////////////////////////////////////////////////////////////////////////////////api
     // 확인 버튼 클릭 시
     document.querySelector('.but4').addEventListener('click', function() {
         // 폼 데이터 수집
-
         const emailUser = document.getElementById('email').value;
         const emailDomain = document.getElementById('optmailid').value;
         const email = emailUser + "@" + emailDomain;
@@ -165,24 +231,22 @@ document.addEventListener('DOMContentLoaded', function() {
             waist: waist
         };
 
-        
-    // 서버로 전송
-    fetch('http://localhost:8080/signUp', { // 
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      // 사용자에게 성공 메시지 표시 등
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      // 사용자에게 오류 메시지 표시 등
+        // 서버로 전송
+        fetch('http://localhost:8080/signUp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // 사용자에게 성공 메시지 표시 등
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // 사용자에게 오류 메시지 표시 등
+        });
     });
-  });
-
 });
