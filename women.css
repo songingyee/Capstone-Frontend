@@ -237,7 +237,7 @@ html {
     cursor: pointer; /* Change cursor to pointer when hovering over the button */
 }
 
-.heart.active {
+.heart.clicked {
     width: 18px;
     height: 17px;
    
@@ -308,5 +308,21 @@ footer {
     position: absolute;
     margin-top: 10px;
     left: 12%;
+}
+
+.footer-button-box{
+    cursor: pointer;
+    width: 220px;
+    height: 55px;
+}
+
+.footer-button-box  a{
+    text-decoration: none;
+}
+
+.footer-button-box  a  img{
+    width: 93px;
+    height: 42px;
+    padding: 5px;
 }
 
