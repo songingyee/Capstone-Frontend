@@ -130,6 +130,10 @@ header {
     width: 1200px;
     height: 500px
 }
+
+h1 {
+    text-align: center;
+}
 /**/
 
 
@@ -182,6 +186,23 @@ header {
     background-color: transparent;
 }
 
+div {
+    min-width: 224px
+}
+.brand, .price {
+    font-weight: bold;
+}
+
+.manual {
+    white-space: normal; /* 텍스트가 줄바꿈되도록 설정합니다. */
+    max-width: 224px; /* 최대 가로 너비를 224px로 설정합니다. */
+    text-align: left;
+    text-decoration: #777777;
+    display: inline-block; /* 텍스트의 실제 너비를 계산할 수 있도록 설정합니다. */
+    word-wrap: break-word; /* 텍스트가 넘칠 경우 줄바꿈되도록 설정합니다. */
+}
+
+
 
 /* User agent styles */
 .producta:-webkit-any-link {
@@ -213,6 +234,11 @@ li, dl {
 ul {
     list-style-type: disc;
 }
+
+.manual {
+    white-space: pre-wrap; /* 줄바꿈을 허용합니다. */
+}
+
 
 html {
     font-family: sans-serif;
