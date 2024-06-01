@@ -1,21 +1,16 @@
-
 let currentPage = 1;
 const itemsPerPage = 12;
-let totalPages = 1;
+let totalPages = 4;
 
 async function loadProducts(page) {
     try {
-        const response = await fetch(`https://99590e5f-333b-462e-82b8-b3026b4fa106.mock.pstmn.io/women?page=${page}`); // 페이지 번호를 동적으로 설정합니다.
+        const response = await fetch(`http://localhost:8080/api/men?page=${page}`);
         const data = await response.json();
 
         const productList = document.getElementById('productList');
         productList.innerHTML = '';
 
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const pageData = data.data.slice(startIndex, endIndex);
-
-        pageData.forEach(product => {
+        data.data.forEach(product => { 
             const listItem = document.createElement('li');
             listItem.id = `product${product.id}`;
 
@@ -45,7 +40,9 @@ async function loadProducts(page) {
         });
 
         loadButtonStates();
-        totalPages = Math.ceil(data.data.length / itemsPerPage);
+        
+        // API 응답에서 totalPages 업데이트
+        totalPages = data.pageInfo.totalPages;
         updatePagination(page);
 
     } catch (error) {
