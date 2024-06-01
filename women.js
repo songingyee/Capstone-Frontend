@@ -5,7 +5,7 @@ let totalPages = 1; // 총 페이지 수 (초기 값)
 async function loadProducts(page) {
     try {
         // 페이지 번호를 URL에 추가하여 데이터 요청
-        const response = await fetch(`https://99590e5f-333b-462e-82b8-b3026b4fa106.mock.pstmn.io/women?page=${page}`);
+        const response = await fetch(`http://localhost:8080/api/women?page=X페이지`);
         const data = await response.json();
 
         // 받아온 데이터를 화면에 추가
