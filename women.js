@@ -5,7 +5,7 @@ let totalPages = 1;
 
 async function loadProducts(page) {
     try {
-        const response = await fetch(`https://99590e5f-333b-462e-82b8-b3026b4fa106.mock.pstmn.io/women?page=${page}`); // 페이지 번호를 동적으로 설정합니다.
+        const response = await fetch(`http://localhost:8080/api/women?page=${page}`); // 페이지 번호를 동적으로 설정합니다.
         const data = await response.json();
 
         const productList = document.getElementById('productList');
