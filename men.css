@@ -5,6 +5,9 @@ body, html {
     background: #fff;
     
 }
+body {
+    overflow-x: hidden;
+}
 
 header {
     display: flex;
@@ -127,7 +130,43 @@ header {
     width: 1200px;
     height: 500px
 }
+
+h1 {
+    text-align: center;
+}
 /**/
+
+/*----------------------------------버튼*/
+
+/* 페이지네이션 컨테이너 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* 페이지네이션과 상품 리스트 사이의 간격 조정 */
+}
+
+/* 페이지네이션 버튼 */
+.pagination button {
+    margin: 0 5px; /* 버튼 사이의 간격 조정 */
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+/* 활성화된 페이지 버튼 */
+.pagination button.active {
+    background-color: #333;
+    color: #fff;
+}
+
+/*----------------------------------버튼*/
+
+
+
+
 
 
 .thumbnail_list ul#productList {
@@ -172,6 +211,23 @@ header {
     background-color: transparent;
 }
 
+div {
+    min-width: 224px
+}
+.brand, .price {
+    font-weight: bold;
+}
+
+.manual {
+    white-space: normal; /* 텍스트가 줄바꿈되도록 설정합니다. */
+    max-width: 224px; /* 최대 가로 너비를 224px로 설정합니다. */
+    text-align: left;
+    text-decoration: #777777;
+    display: inline-block; /* 텍스트의 실제 너비를 계산할 수 있도록 설정합니다. */
+    word-wrap: break-word; /* 텍스트가 넘칠 경우 줄바꿈되도록 설정합니다. */
+}
+
+
 
 /* User agent styles */
 .producta:-webkit-any-link {
@@ -204,6 +260,11 @@ ul {
     list-style-type: disc;
 }
 
+.manual {
+    white-space: pre-wrap; /* 줄바꿈을 허용합니다. */
+}
+
+
 html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
@@ -227,7 +288,7 @@ html {
     cursor: pointer; /* Change cursor to pointer when hovering over the button */
 }
 
-.heart.active {
+.heart.clicked {
     width: 18px;
     height: 17px;
    
@@ -298,5 +359,21 @@ footer {
     position: absolute;
     margin-top: 10px;
     left: 12%;
+}
+
+.footer-button-box{
+    cursor: pointer;
+    width: 220px;
+    height: 55px;
+}
+
+.footer-button-box  a{
+    text-decoration: none;
+}
+
+.footer-button-box  a  img{
+    width: 93px;
+    height: 42px;
+    padding: 5px;
 }
 
