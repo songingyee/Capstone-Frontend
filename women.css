@@ -137,22 +137,31 @@ h1 {
 /**/
 
 /*----------------------------------버튼*/
+
+/* 페이지네이션 컨테이너 */
 .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    align-items: center;
+    margin-top: 20px; /* 페이지네이션과 상품 리스트 사이의 간격 조정 */
 }
 
+/* 페이지네이션 버튼 */
 .pagination button {
-    margin: 0 5px;
+    margin: 0 5px; /* 버튼 사이의 간격 조정 */
     padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
     cursor: pointer;
 }
 
+/* 활성화된 페이지 버튼 */
 .pagination button.active {
-    background-color: #007bff;
-    color: white;
+    background-color: #333;
+    color: #fff;
 }
+
 /*----------------------------------버튼*/
 
 
