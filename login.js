@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.login-btn').addEventListener('click', function(event) {
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
         event.preventDefault(); // 폼의 기본 제출 동작을 방지
 
         const email = document.getElementById('email').value;
