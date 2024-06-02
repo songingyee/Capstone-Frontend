@@ -19,7 +19,6 @@ async function loadProducts(page) {
                     <button type="button" name="button" class="heart" onclick="toggleButton('${listItem.id}', this)"></button>
                     <a href="#" class="producta">
                         <img src="${product.image}" alt="Product Image" class="productimg">
-                    </a>
                 </div>
                 <div class="spacer"></div>
                 <div class="text-max">
@@ -35,6 +34,7 @@ async function loadProducts(page) {
                         <span class="base_price">${product.price}원</span>
                     </div>
                 </div>
+                </a>
             `;
             productList.appendChild(listItem);
         });
