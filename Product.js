@@ -1,24 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const reviewForm = document.getElementById('review-form');
-    const stars = document.querySelectorAll('.star');
-    let selectedRating = 0; // 선택된 별점 초기화
-
-    function displayProductDetails(data) {
-        document.getElementById('brand').textContent += data.Brand;
-        document.getElementById('product-name').textContent += data.Product;
-        document.getElementById('type').textContent += data.TYPE;
-        document.getElementById('size').textContent += data.Size;
-        document.getElementById('length').textContent += data['Total Length'];
-        document.getElementById('waist').textContent += data['Waist width'];
-        document.getElementById('gender').textContent += data.gender;
-        document.getElementById('price').textContent += data.price + ' USD';
-        document.getElementById('product-image').src = data.image;
-        document.getElementById('buy-now-button').onclick = () => window.open(data.link, '_blank');
-    }
-
     const params = new URLSearchParams(window.location.search);
     const productId = params.get('productId');
-    loadProductDetails(productId);
+    loadProductDetails(productId); // 상품 로드
+    loadReviews(productId); // 리뷰 로드
+
+    const reviewForm = document.querySelector('.user-review');
+    const stars = document.querySelectorAll('.star');
+    let selectedRating = 0;
 
     stars.forEach(star => {
         star.addEventListener('click', function() {
@@ -35,54 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     reviewForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        submitReview();
+        submitReview(productId);
     });
-
-    function submitReview() {
-
-        const title = document.getElementById('review-title').value;
-        const content = document.getElementById('review-content').value;
-
-        if (!title || !content || selectedRating === 0) {
-            alert('모든 필드를 채워주세요.');
-            return;
-        }
-
-        fetch('http://localhost:8080/api/itemDetail/${productId}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                title: title,
-                content: content,
-                star: selectedRating,
-                username: 'currentUsername' // 현재 로그인한 사용자의 이름
-            })
-        }).then(response => {
-            if (!response.ok) {
-                throw new Error('Review submission failed');
-            }
-            return response.json();
-        }).then(data => {
-            addReviewToPage(title, content, selectedRating);
-            // 입력 필드 초기화
-            document.getElementById('review-title').value = '';
-            document.getElementById('review-content').value = '';
-            updateStars(0);
-        }).catch(error => {
-            console.error('Error:', error);
-            alert('리뷰 제출 중 문제가 발생했습니다: ' + error.message);
-        });
-    }
-
-    function addReviewToPage(title, content, stars) {
-        const reviewElement = document.createElement('div');
-        reviewElement.innerHTML = `<strong>${title}</strong><p>${content}</p><p>Rating: ${'⭐'.repeat(stars)}</p>`;
-        document.querySelector('.user-reviews').appendChild(reviewElement);
-    }
-
-
 
     function loadProductDetails(productId) {
         fetch(`http://localhost:8080/api/itemDetail/${productId}`)
@@ -100,5 +42,97 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function displayProductDetails(data) {
+        document.getElementById('brand').textContent += data.company;
+        document.getElementById('product-name').textContent += data.itemName;
+        document.getElementById('type').textContent += data.type || 'N/A';
+        document.getElementById('size').textContent += data.size;
+        document.getElementById('length').textContent += data.sizeList.length;
+        document.getElementById('waist').textContent += data.sizeList.waistWidth;
+        document.getElementById('gender').textContent += data.gender || 'N/A';
+        document.getElementById('price').textContent += data.price + ' USD';
+        document.getElementById('product-image').src = data.image;
+        document.getElementById('buy-now-button').onclick = () => window.open(data.siteUrl, '_blank');
+        
+        // 리뷰 로드
+        if (data.itemReview) {
+            data.itemReview.forEach(review => {
+                addReviewToPage(review.title, review.content, review.star, review.username);
+            });
+        }
+    }
 
+    function submitReview(productId) {
+        if (!isLoggedIn()) {
+            alert('로그인 후 이용해주세요.');
+            window.location.href = 'join.html';
+            return;
+        }
+
+        const title = document.getElementById('review-title').value;
+        const content = document.getElementById('review-content').value;
+
+        if (!title || !content || selectedRating === 0) {
+            alert('모든 필드를 채워주세요.');
+            return;
+        }
+
+        fetch(`http://localhost:8080/api/itemDetail/${productId}/review`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: productId,
+                title: title,
+                content: content,
+                star: selectedRating,
+                username: 'currentUsername' // 현재 로그인한 사용자의 이름
+            })
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Review submission failed');
+            }
+            return response.json();
+        }).then(data => {
+            addReviewToPage(title, content, selectedRating, 'currentUsername');
+            // 입력 필드 초기화
+            document.getElementById('review-title').value = '';
+            document.getElementById('review-content').value = '';
+            updateStars(0);
+        }).catch(error => {
+            console.error('Error:', error);
+            alert('리뷰 제출 중 문제가 발생했습니다: ' + error.message);
+        });
+    }
+
+    function addReviewToPage(title, content, stars, username) {
+        const reviewElement = document.createElement('div');
+        reviewElement.classList.add('review');
+        reviewElement.innerHTML = `
+            <div class="review-user"><strong>${username}</strong></div>
+            <div class="review-title">${'⭐'.repeat(stars)} - ${title}</div>
+            <div class="review-content">${content}</div>
+        `;
+        document.querySelector('.user-reviews').appendChild(reviewElement);
+    }
+
+    // 리뷰 불러오기 함수
+    function loadReviews(productId) {
+        fetch(`http://localhost:8080/api/itemDetail/${productId}/reviews`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch reviews');
+            }
+            return response.json();
+        })
+        .then(reviews => {
+            reviews.forEach(review => {
+                addReviewToPage(review.title, review.content, review.star, review.username);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading reviews:', error);
+        });
+    }
 });
