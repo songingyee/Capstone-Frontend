@@ -1,12 +1,8 @@
 body, html {
-    height: 100%;
+    height: auto;
     margin: 0;
     font-family: Arial, sans-serif;
     background: #fff;
-    
-}
-body {
-    overflow-x: hidden;
 }
 
 header {
@@ -36,14 +32,19 @@ header {
     font-family: Inter;
 }
 
+.login-link > img{
+    margin: 0;
+}
+
 .search-container{
-    margin-left: 140px;
+    margin-left: 50px;
     display: table;
 }
 
 .search-child{
     display: table-cell;
     vertical-align: middle;
+    flex: none;
 }
 
 .search-bar {
@@ -51,6 +52,7 @@ header {
     padding: 8px;
     border: none;
     border-bottom: 1px solid #ccc;
+
 }
 
 .search-icon {
@@ -77,7 +79,7 @@ header {
 
 .login-area {
     display: flex; 
-    justify-content: center;
+    justify-content: center; 
     align-items: center; 
 }
 
@@ -94,13 +96,12 @@ header {
 .login-area img {
     width: 28px;
     height: 28px;
-    margin-bottom: 4px; 
+    margin-bottom: 4px;
 }
 
 .login-area span {
     font-size: medium;
 }
-
 
 .page-name{
     text-align: center;
@@ -121,235 +122,35 @@ header {
 }
 
 
-.product {
-    width: 200px;
-    height: 270px;
-}
-
-.ad {
-    width: 1200px;
-    height: 500px
-}
-
-h1 {
-    text-align: center;
-}
-/**/
-
-/*----------------------------------버튼*/
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.pagination button {
-    margin: 0 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.pagination button.active {
-    background-color: #007bff;
-    color: white;
-}
-/*----------------------------------버튼*/
-
-
-
-
-
-
-.thumbnail_list ul#productList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 0;
-    max-width: 1440px;
-    margin: 0 auto;
-}
-
-
-
-.thumbnail_list ul#productList li {
-    /* display: inline-block; */
-    /* margin-right: 20px; 각 항목 사이의 간격을 조정할 수 있습니다 */
-    /* vertical-align: top; 세로 정렬을 맞추기 위해 상단 정렬로 설정합니다 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: calc(100%/6-10px);
-    margin-bottom: 20px;
-}
-
-
-
-/* Custom styles */
-.thumbnail_list ul li .producta {
-    font-family: "ProximaNova-Regular", "Noto Sans KR";
-    color: #000;
-    text-decoration: none;
-}
-.productimg {
-    width: 224px;
-    height: 316px;
-}
-.producta, .productimg, input, button, select, textarea {
-    vertical-align: middle;
-}
-
-.producta {
-    background-color: transparent;
-}
-
-div {
-    min-width: 224px
-}
-.brand, .price {
-    font-weight: bold;
-}
-
-.manual {
-    white-space: normal; /* 텍스트가 줄바꿈되도록 설정합니다. */
-    max-width: 224px; /* 최대 가로 너비를 224px로 설정합니다. */
-    text-align: left;
-    text-decoration: #777777;
-    display: inline-block; /* 텍스트의 실제 너비를 계산할 수 있도록 설정합니다. */
-    word-wrap: break-word; /* 텍스트가 넘칠 경우 줄바꿈되도록 설정합니다. */
-}
-
-
-
-/* User agent styles */
-.producta:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
- 
-
-html {
-    font-family: sans-serif;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-}
-
-/* User agent styles */
-.producta:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-li, dl {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-ul {
-    list-style-type: disc;
-}
-
-.manual {
-    white-space: pre-wrap; /* 줄바꿈을 허용합니다. */
-}
-
-
-html {
-    font-family: sans-serif;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-}
-
-.heart {
-
-    width: 18px;
-    height: 17px;
-   
-    background-image: url("/Users/kyw/Desktop/likebefore.png");
-    background-size: contain;
-    background-color: rgba(0, 0, 0, 0);
-    background-repeat: no-repeat;
-    border: none;
-    position: absolute; /* 버튼을 절대 위치로 설정 */
-    top: 10px; /* 이미지의 위쪽에 배치 */
-    right: 10px; /* 이미지의 오른쪽에 배치 */
-    /* z-index: 10; Ensure button is above the image */
-    cursor: pointer; /* Change cursor to pointer when hovering over the button */
-}
-
-.heart.clicked {
-    width: 18px;
-    height: 17px;
-   
-    background-image: url("/Users/kyw/Desktop/likeafter.png");
-    background-size: contain;
-    background-color: rgba(0, 0, 0, 0);
-    background-repeat: no-repeat;
-    border: none;
-}
-
-.spacer {
-    height: 20px; /* 원하는 높이로 조정 가능 */
-}
-
-.spacer1 {
-    height: 10px;
-}
-
-.trend {
-    display: flex;
-    justify-content: center;
-
-}
-
-
-
-
-
-
-
-
-@media screen and (max-width: 768px) {
-    .thumbnail_list ul#productList li {
-        width: 48%; /* 작은 화면에서는 두 개씩 나타나도록 설정합니다. */
-    }
-}
-
-
-
-
-
-/**/
-
 .info_1{
     font-size: 16px;
 }
 .info_2{
     font-size: 12px;
-    color: grey;
+    color: gray;
 }
+
+
 footer {
     flex-direction: row;
-    padding: 20px
-
+    padding: 20px;
 }
 
 .footer-info {
-    display: flex;
+    display: flex; 
     justify-content: center;
-    align-items: center;
-    width: 100%;
-
+    align-items: center; 
+    width: 100%; 
 }
 
 .footer-Customer-Service{
     width: 200px;
     height: 80px;
-    position: absolute;
+    position: absolute; 
     margin-top: 10px;
-    left: 12%;
+    left: 12%; 
+
+
 }
 
 .footer-button-box{
@@ -358,12 +159,270 @@ footer {
     height: 55px;
 }
 
-.footer-button-box  a{
+.footer-button-box > a{
     text-decoration: none;
 }
 
-.footer-button-box  a  img{
+.footer-button-box > a > img{
     width: 93px;
     height: 42px;
     padding: 5px;
+}
+
+/* Product page */
+
+.section {
+    padding-bottom: 10px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    width: 80%;
+    height: auto;
+    margin: auto;
+    padding-top: 20px;
+    
+}
+
+.section-box {
+    width: 1080px;
+    height: 513px;
+    margin: 0 auto;
+    border: 1px solid black;
+    display: flex;
+}
+
+.product-image {
+    width: 378px;
+    height: 513px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 98%;
+    height: 100%;
+    object-fit: cover; /* 또는 object-fit: contain; */
+}
+
+.product-name {
+    font-size: 24px; /* 폰트 크기를 크게 */
+    font-weight: bold; /* 폰트를 진하게 */
+    color: #333; /* 폰트 색을 진하게 */
+}
+
+.info {
+    width: 702px;
+    height: 410px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* 각 줄 사이의 간격을 넓힘 */
+}
+
+.product-image img {
+    width: 100%; /* 이미지가 부모 요소의 너비에 맞게 조정 */
+    height: 100%; /* 이미지가 부모 요소의 높이에 맞게 조정 */
+    object-fit: cover; /* 이미지가 잘리지 않고 부모 요소에 맞게 조정 */
+}
+
+
+.info-button-box {
+    text-align: right;
+    margin-top: 30px;
+    margin-right: 30px;
+    
+}
+.info-button1 {
+    background-color: #EEB9B9;
+    width: 120px;
+    height: 40px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+              0 2px 2px rgba(0,0,0,0.15), 
+              0 4px 4px rgba(0,0,0,0.15), 
+              0 8px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s ease; /* 크기 변화에 애니메이션 적용 */
+}
+.info-button2 {
+    background-color: #EE8484;
+    width: 120px;
+    height: 40px;
+    border: 1px solid gray;
+    margin-left: 25px;
+    border-radius: 8px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+              0 2px 2px rgba(0,0,0,0.15), 
+              0 4px 4px rgba(0,0,0,0.15), 
+              0 8px 8px rgba(0,0,0,0.15);
+    transition: all 0.5s ease; /* 크기 변화에 애니메이션 적용 */
+}
+
+.comment-button {
+    background-color: #EE8484;
+    width: 180px;
+    height: 60px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+              0 2px 2px rgba(0,0,0,0.15), 
+              0 4px 4px rgba(0,0,0,0.15), 
+              0 8px 8px rgba(0,0,0,0.15);
+    transition: all 0.5s ease; /* 크기 변화에 애니메이션 적용 */
+    margin-top: 23px;
+    margin-left: 250px;
+}
+
+.info-button1:hover, .info-button2:hover, .comment-button:hover {
+    cursor: pointer; /* 마우스 포인터로 변경 */
+    transform: scale(1.1); /* 크기를 110%로 확대 */
+}
+
+.user-review-box {
+    width: 1080px;
+    height: 700px;
+    margin: 20px auto;
+    border: 1px solid black;
+    overflow-y: auto; /* 내용이 높이를 초과할 경우 스크롤 바 활성화 */
+}
+
+h2{
+    margin: auto;
+    padding: 0;
+    width: 1020px;
+}
+
+.user-review-input {
+    margin: 5px;
+    width: 800px;
+    height: 30px;
+}
+
+.user-review {
+    margin: auto;
+    display: flex;
+    border: 1px solid black;
+    width: 1060px;
+    height: 105px;
+}
+
+
+/* 댓글 디자인 추가 */
+
+.review {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.review-user {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.review-title {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.review-content {
+    font-size: 1em;
+}
+
+.review-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.review-item p {
+    margin: 5px 0;
+}
+
+.review-item strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.comment {
+    width: 600px;
+}
+
+.comment-title {
+    margin: 5px;
+    height: 20px;
+    width: 400px;
+}
+
+.rating {
+    margin-left: 10px;
+    margin-top: 2px;
+}
+
+/* 모바일 : ~768px */
+/* 태블릿 : 768px ~ 1024px */
+/* 모니터 : 1024px~ */
+
+/* 갤럭시탭 S9 FE을 위한 미디어 쿼리 */
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* header 부분의 요소들에 대한 스타일링 */
+    .top-menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .top-menu .login-link img {
+        width: auto;
+    }
+
+    .search-container {
+        flex-grow: 1;
+        margin: 0 20px;
+    }
+
+
+    .search-bar {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .login-area {
+        display: flex;
+        gap: 10px;
+    }
+}
+
+
+@media (max-width: 820px){
+    .footer-Customer-Service {
+        display: none;
+    }
+}
+/* 더 작은 화면 크기에 대한 미디어 쿼리 */
+@media (max-width: 768px) {
+    .search-container, .login-area {
+        display: none; 
+    }
+
+    .top-menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .top-menu .login-link {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .top-menu .login-link img {
+        display: block;
+        margin: 0 auto;
+        height: auto;
+        max-height: 60px;
+        width: auto;
+    }
 }
