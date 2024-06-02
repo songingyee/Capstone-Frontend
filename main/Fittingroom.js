@@ -3,6 +3,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const deleteButton = document.getElementById('delete-button');
     const completedMessage = document.getElementById('completed-message');
 
+    // 쿠키 확인을 통해 로그인 상태를 파악합니다.
+    const isLoggedIn = document.cookie.includes('sessionID'); // 세션 ID 쿠키 확인
+
+    if (!isLoggedIn) {
+        // 사용자가 로그인되지 않은 경우 login.html
+        window.location.href = 'login.html';
+        return;
+    }
+
     fileInput.addEventListener('change', function() {
         const file = this.files[0];
         const fileName = file.name;
@@ -14,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData();
         formData.append('file', file);
 
-        // API 엔드포인트로 POST 요청
+        // API 엔드포인트로 POST 요청을 보냅니다.
         fetch('http://localhost:8080/api/upload', {
             method: 'POST',
             body: formData,
@@ -44,13 +53,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });  
 
-
-// /api/recommend로 GET 요청을 보내어 추천 상품 정보를 가져옵니다.
-fetch('http://localhost:8080/api/recommend'){
-     // 세션 ID를 쿠키에 설정합니다.
-    method: 'GET', 
-    credentials: 'same-origin'
-}
+      //추천 상품 정보
+      fetch('http://localhost:8080/api/recommend', {
+        method: 'GET',
+        // 세션 ID를 쿠키에 설정합니다.
+        credentials: 'same-origin'
+    })
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
