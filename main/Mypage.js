@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // 쿠키에서 세션 ID 가져오기
   const sessionId = getCookie('sessionId');
 
+    if (!sessionId) {
+    // 세션 ID가 없으면 
+    window.location.href = 'login.html';
+    return;
+  }
+
+
   // API에서 데이터 가져오기
   fetch('http://localhost:8080/api/mypage', {
       headers: {
