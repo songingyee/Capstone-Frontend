@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sessionId = getCookie('sessionId');
 
   // API에서 데이터 가져오기
-  fetch('http://localhost:8080/api/mypage/{memberId}', {
+  fetch('http://localhost:8080/api/mypage', {
       headers: {
           'Session-ID': sessionId // 세션 ID를 헤더에 포함하여 서버로 전송
       }
