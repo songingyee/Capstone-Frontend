@@ -17,7 +17,7 @@ async function loadProducts(page) {
             listItem.innerHTML = `
                 <div class="img" style="position: relative;">
                     <button type="button" name="button" class="heart" onclick="toggleButton('${listItem.id}', this)"></button>
-                    <a href="#" class="producta">
+                    <a href="product.html?productId=${product.id}" class="producta">
                         <img src="${product.image}" alt="Product Image" class="productimg">
                 </div>
                 <div class="spacer"></div>
