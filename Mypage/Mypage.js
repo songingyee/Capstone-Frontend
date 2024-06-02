@@ -1,0 +1,51 @@
+document.addEventListener('DOMContentLoaded', () => {
+  // API에서 데이터 가져오기
+ fetch('https://25c655d4-ca15-482f-9e72-4110c1223611.mock.pstmn.io')
+    .then(response => response.json())
+    .then(data => {
+    // My Information 렌더링
+    document.getElementById('email').textContent = data.email;
+    document.getElementById('gender').textContent = data.gender;
+    document.getElementById('age').textContent = data.age;
+    document.getElementById('height').textContent = data.height;
+    document.getElementById('weight').textContent = data.weight;
+    document.getElementById('waist').textContent = data.waist;
+
+  // My Reviews 렌더링
+  const myReviewsContainer = document.getElementById('myReviews');
+  if (myReviewsContainer) {
+    data.myReviewItems.forEach(item => {
+     const reviewItem = document.createElement('div');
+     reviewItem.classList.add('review-item');
+     reviewItem.innerHTML = `
+      <img src="${item.image}" alt="${item.itemName}">
+        <h4>${item.itemName}</h4>
+        <p>Price: ${item.price}원</p>
+        <p>Brand: ${item.company}</p>
+        <p>Size: ${item.size}</p>
+    `;
+    myReviewsContainer.appendChild(reviewItem);
+  });
+}
+
+  // Shopping Cart 렌더링
+  const shoppingCartContainer = document.getElementById('shoppingCart');
+    if (shoppingCartContainer) {
+      data.shoppingCartItems.forEach(item => {
+      const cartItem = document.createElement('div');
+      cartItem.classList.add('cart-item');
+      cartItem.innerHTML = `
+      <img src="${item.image}" alt="${item.itemName}">
+      <h4>${item.itemName}</h4>
+      <p>Price: $${item.price}</p>
+      <p>Brand: ${item.company}</p>
+      <p>Size: ${item.size}</p>
+      `;
+      shoppingCartContainer.appendChild(cartItem);
+      });
+      }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+      });
