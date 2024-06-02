@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData();
         formData.append('file', file);
 
-        // API 엔드포인트로 POST 요청을 보냅니다.
+        // API 엔드포인트로 POST 요청
         fetch('http://localhost:8080/api/upload', {
             method: 'POST',
             body: formData,
