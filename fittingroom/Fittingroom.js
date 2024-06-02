@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });  
 
 
-// /api/recommend로 GET 요청을 보내어 추천 상품 정보를 가져옵니다.
+// /api/recommend로 GET 요청을 보내어 추천 상품 정보
 fetch('http://localhost:8080/api/recommend')
     .then(response => {
         if (!response.ok) {
