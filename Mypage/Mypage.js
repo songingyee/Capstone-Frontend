@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // API에서 데이터 가져오기
- fetch('https://25c655d4-ca15-482f-9e72-4110c1223611.mock.pstmn.io')
+ fetch('http://localhost:8080/api/mypage/{memberId}')
     .then(response => response.json())
     .then(data => {
     // My Information 렌더링
