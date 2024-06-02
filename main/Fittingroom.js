@@ -46,9 +46,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // /api/recommend로 GET 요청을 보내어 추천 상품 정보를 가져옵니다.
-fetch('http://localhost:8080/api/recommend')
+fetch('http://localhost:8080/api/recommend'){
      // 세션 ID를 쿠키에 설정합니다.
-     credentials: 'same-origin'
+    method: 'GET', 
+    credentials: 'same-origin'
+}
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
