@@ -276,7 +276,7 @@ html {
     width: 18px;
     height: 17px;
    
-    background-image: url("/Users/kyw/Desktop/likebefore.png");
+    background-image: url("image/likebefore.png");
     background-size: contain;
     background-color: rgba(0, 0, 0, 0);
     background-repeat: no-repeat;
@@ -292,7 +292,7 @@ html {
     width: 18px;
     height: 17px;
    
-    background-image: url("/Users/kyw/Desktop/likeafter.png");
+    background-image: url("image/likeafter.png");
     background-size: contain;
     background-color: rgba(0, 0, 0, 0);
     background-repeat: no-repeat;
