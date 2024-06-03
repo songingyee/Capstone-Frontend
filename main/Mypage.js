@@ -10,11 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // API에서 데이터 가져오기
-  fetch('http://localhost:8080/api/mypage', {
-      headers: {
-          'Session-ID': sessionId // 세션 ID를 헤더에 포함하여 서버로 전송
-      }
-  })
+  fetch('http://localhost:8080/api/mypage/{memberID}', {
+      credentials: 'include'
+})
   .then(response => response.json())
   .then(data => {
       // My Information 렌더링
@@ -24,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('height').textContent = data.height;
       document.getElementById('weight').textContent = data.weight;
       document.getElementById('waist').textContent = data.waist;
-
+    
       // My Reviews 렌더링
       const myReviewsContainer = document.getElementById('myReviews');
       if (myReviewsContainer) {
