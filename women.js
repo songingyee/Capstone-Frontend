@@ -4,7 +4,7 @@ let totalPages = 4;
 
 async function loadProducts(page) {
     try {
-        const response = await fetch(`http://localhost:8080/api/women?page=${page}`);
+        const response = await fetch('http://localhost:8080/api/women?page=?');
         const data = await response.json();
 
         const productList = document.getElementById('productList');
@@ -17,7 +17,7 @@ async function loadProducts(page) {
             listItem.innerHTML = `
                 <div class="img" style="position: relative;">
                     <button type="button" name="button" class="heart" onclick="toggleButton('${listItem.id}', this)"></button>
-                    <a href="#" class="producta">
+                    <a href="product.html?productId=${product.id}" class="producta">
                         <img src="${product.image}" alt="Product Image" class="productimg">
                 </div>
                 <div class="spacer"></div>
@@ -100,6 +100,14 @@ function toggleHeart(button, isActive) {
 }
 
 function toggleButton(productId, button) {
+
+    // 로그인 확인 코드
+    // if (!isLoggedIn()) {
+    //     alert('로그인 후 이용해주세요.');
+    //     window.location.href = 'join.html';
+    //     return;
+    // }
+
     const productDiv = document.getElementById(productId);
     const productHTML = productDiv.innerHTML;
 
@@ -139,6 +147,7 @@ function loadButtonStates() {
     }
 }
 
+
 window.onload = function() {
     loadProducts(currentPage);
-};
+}
