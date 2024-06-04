@@ -2,13 +2,19 @@ let currentPage = 1;
 
 async function loadProducts(page) {
     try {
-        const response = await fetch('http://localhost:8080/api/recommend');
+        const response = await fetch('http://localhost:8080/api/recommend', {
+            method: 'GET',
+            credentials: 'include'//쿠키를 포함한 요청
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
         const data = await response.json();
 
         const productList = document.getElementById('productList');
         productList.innerHTML = '';
 
-        data.data.forEach(product => { 
+        data.data.forEach(product => { //제품 데이터 반복
             const listItem = document.createElement('li');
             listItem.id = `product${product.id}`;
 
@@ -53,12 +59,11 @@ function toggleHeart(button, isActive) {
 }
 
 function toggleButton(productId, button) {
-    // 로그인 확인 코드
-    // if (!isLoggedIn()) {
-    //     alert('로그인 후 이용해주세요.');
-    //     window.location.href = 'join.html';
-    //     return;
-    // }
+    if (!isLoggedIn()) {
+        alert('로그인 후 이용해주세요.');
+        window.location.href = 'join.html';
+        return;
+    }
 
     const productDiv = document.getElementById(productId);
     const productHTML = productDiv.innerHTML;
@@ -97,6 +102,10 @@ function loadButtonStates() {
             toggleHeart(button, isActive);
         }
     }
+}
+
+function isLoggedIn() { //로그인 여부 확인
+    return localStorage.getItem('isLoggedIn') === 'true'; // 로컬 스토리지에서 로그인 상태 확인
 }
 
 window.onload = function() {
