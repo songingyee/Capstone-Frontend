@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteButton.addEventListener('click', handleDeleteButtonClick);
     }
 
-    function handleFileUpload() {
+    async function handleFileUpload() {
         const file = this.files[0];
         if (!file) {
             return;
@@ -41,24 +41,23 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData();
         formData.append('file', file);
 
-        fetch('http://localhost:8080/api/upload', {
-            method: 'POST',
-            body: formData,
-            credentials: 'include'
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
+        try {
+            const response = await fetch('http://localhost:8080/api/upload', {
+                method: 'POST',
+                body: formData,
+                credentials: 'include'
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
             }
-            throw new Error('Network response was not ok.');
-        })
-        .then(data => {
+
+            const data = await response.json();
             console.log('Server response:', data);
             fetchRecommendations();
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Error uploading file:', error);
-        });
+        }
     }
 
     function handleDeleteButtonClick(event) {
@@ -68,52 +67,5 @@ document.addEventListener('DOMContentLoaded', function() {
         completedMessage.style.display = 'none';
         recommendationsContainer.innerHTML = '';
     }
-
-    /////////////추천시스템////////////////////
     
-    function fetchRecommendations() {
-        fetch('http://localhost:8080/api/recommend', {
-            method: 'GET',
-            credentials: 'include'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            displayRecommendations(data);
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
-    }
-
-    function displayRecommendations(recommendations) {
-        recommendationsContainer.innerHTML = '';
-    
-        if (!Array.isArray(recommendations)) {
-            recommendations = [recommendations];
-        }
-    
-        recommendations.forEach(item => {
-            const itemDiv = document.createElement('div');
-            itemDiv.classList.add('recommendation');
-            const sizeInfo = item.sizeList ? `Size: ${item.size}` : '';
-            const sizeListInfo = item.sizeList ? `<p>Size Details: ${JSON.stringify(item.sizeList)}</p>` : '';
-            const siteUrlLink = item.siteUrl ? `<p><a href="${item.siteUrl}" target="_blank">More Info</a></p>` : '';
-            itemDiv.innerHTML = `
-                <div class="recommendation-info">
-                    <img src="${item.image}" alt="${item.itemName}">
-                    <h3>${item.company}</h3>
-                    <p>${item.itemName}</p>
-                    <p>${item.price} 원</p>
-                    ${sizeInfo}
-                    ${sizeListInfo}
-                    ${siteUrlLink}
-                </div>
-            `;
-            recommendationsContainer.appendChild(itemDiv);
-        });
-    }
+});
