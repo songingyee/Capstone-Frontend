@@ -2,7 +2,7 @@ let currentPage = 1;
 
 async function loadProducts(page) {
     try {
-        const response = await fetch('https://25c655d4-ca15-482f-9e72-4110c1223611.mock.pstmn.io', {
+        const response = await fetch('http://localhost:8080/api/recommend', {
             method: 'GET',
             credentials: 'include', // 세션 쿠키를 요청에 포함
             headers: {
