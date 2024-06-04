@@ -69,6 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
         recommendationsContainer.innerHTML = '';
     }
 
+    /////////////추천시스템////////////////////
+    
     function fetchRecommendations() {
         fetch('http://localhost:8080/api/recommend', {
             method: 'GET',
@@ -90,24 +92,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function displayRecommendations(recommendations) {
         recommendationsContainer.innerHTML = '';
-
+    
         if (!Array.isArray(recommendations)) {
             recommendations = [recommendations];
         }
-
+    
         recommendations.forEach(item => {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('recommendation');
+            const sizeInfo = item.sizeList ? `Size: ${item.size}` : '';
+            const sizeListInfo = item.sizeList ? `<p>Size Details: ${JSON.stringify(item.sizeList)}</p>` : '';
+            const siteUrlLink = item.siteUrl ? `<p><a href="${item.siteUrl}" target="_blank">More Info</a></p>` : '';
             itemDiv.innerHTML = `
                 <div class="recommendation-info">
                     <img src="${item.image}" alt="${item.itemName}">
                     <h3>${item.company}</h3>
                     <p>${item.itemName}</p>
                     <p>${item.price} 원</p>
-                    <p><a href="${item.siteUrl}" target="_blank">More Info</a></p>
+                    ${sizeInfo}
+                    ${sizeListInfo}
+                    ${siteUrlLink}
                 </div>
             `;
             recommendationsContainer.appendChild(itemDiv);
         });
     }
-});
