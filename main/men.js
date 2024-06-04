@@ -4,7 +4,7 @@
 
 // async function loadProducts(page) {
 //     try {
-//         const response = await fetch(`http://localhost:8080/api/men?page=${page}`);
+//         const response = await fetch(`http://localhost:8080/api/men?page=?`);
 //         const data = await response.json();
 
 //         const productList = document.getElementById('productList');
