@@ -2,19 +2,34 @@ let currentPage = 1;
 
 async function loadProducts(page) {
     try {
-        const response = await fetch('http://localhost:8080/api/recommend', {
+        const response = await fetch('https://25c655d4-ca15-482f-9e72-4110c1223611.mock.pstmn.io', {
             method: 'GET',
-            credentials: 'include'//쿠키를 포함한 요청
+            credentials: 'include', // 세션 쿠키를 요청에 포함
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
+
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+
         const data = await response.json();
 
+        // 데이터가 배열인지 확인
+        if (!Array.isArray(data.data)) {
+            throw new Error('Unexpected response format');
+        }
+
         const productList = document.getElementById('productList');
+        // productList가 존재하는지 확인
+        if (!productList) {
+            throw new Error('Product list element not found');
+        }
+
         productList.innerHTML = '';
 
-        data.data.forEach(product => { //제품 데이터 반복
+        data.data.forEach(product => {
             const listItem = document.createElement('li');
             listItem.id = `product${product.id}`;
 
@@ -47,6 +62,17 @@ async function loadProducts(page) {
 
     } catch (error) {
         console.error('Failed to load products:', error);
+        showErrorMessage(error.message);
+    }
+}
+
+function showErrorMessage(message) {
+    const errorContainer = document.getElementById('errorContainer');
+    if (errorContainer) {
+        errorContainer.textContent = message;
+        errorContainer.style.display = 'block';
+    } else {
+        console.error('Error container element not found');
     }
 }
 
@@ -104,10 +130,11 @@ function loadButtonStates() {
     }
 }
 
-function isLoggedIn() { //로그인 여부 확인
-    return localStorage.getItem('isLoggedIn') === 'true'; // 로컬 스토리지에서 로그인 상태 확인
+function isLoggedIn() {
+    return localStorage.getItem('isLoggedIn') === 'true';
 }
 
 window.onload = function() {
     loadProducts(currentPage);
 }
+
