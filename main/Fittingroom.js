@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const recommendationsContainer = document.getElementById('recommendations');
 
     // 세션 유효성 확인
-    fetch('http://localhost:8080/api/session', {
+    fetch('http://localhost:8080/session-check', {
         method: 'GET',
         credentials: 'include'
     })
