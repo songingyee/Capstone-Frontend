@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const params = new URLSearchParams(window.location.search);
     const productId = params.get('productId');
-    loadProductDetails(productId); // 상품 로드 및 리뷰 로드
+    loadProductDetails(productId); // 상품 로드
 
     const reviewForm = document.querySelector('.user-review');
     const stars = document.querySelectorAll('.star');
@@ -42,18 +42,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function displayProductDetails(data) {
-        document.getElementById('brand').textContent += data.company;
-        document.getElementById('product-name').textContent += data.itemName;
-        document.getElementById('type').textContent += data.type;
-        document.getElementById('size').textContent += data.size;
-        document.getElementById('length').textContent += data.sizeList.length;
-        document.getElementById('waist').textContent += data.sizeList.waistWidth;
-        document.getElementById('gender').textContent += data.gender;
-        document.getElementById('price').textContent += data.price + ' USD';
+        document.getElementById('product-name').textContent = data.itemName;
+        document.getElementById('brand').textContent = "Brand: " + data.company;
+        document.getElementById('type').textContent = "Type: " + data.type;
+        document.getElementById('size').textContent = "Size: " + data.size;
+        document.getElementById('length').textContent = "Total Length: " + data.sizeList.length;
+        document.getElementById('waist').textContent = "Waist Width: " + data.sizeList.waistWidth;
+        document.getElementById('gender').textContent = "Gender: " + data.gender;
+        document.getElementById('price').textContent = "Price: " + data.price + ' USD';
         document.getElementById('product-image').src = data.image;
-        document.getElementById('site-link-button').onclick = () => window.open(data.siteUrl, '_blank');
+        document.getElementById('buy-now-button').onclick = () => window.open(data.siteUrl, '_blank');
         
         // 리뷰 로드
+        document.querySelector('.user-reviews').innerHTML = ''; // 기존 리뷰 초기화
         if (data.itemReview) {
             data.itemReview.forEach(review => {
                 addReviewToPage(review.title, review.content, review.star, review.username);
@@ -62,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function submitReview(productId) {
-
         const title = document.getElementById('review-title').value;
         const content = document.getElementById('review-content').value;
 
@@ -71,17 +71,17 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        fetch('http://localhost:8080/api/itemDetail/${productId}', {
+        // 리뷰 제출
+        fetch(`http://localhost:8080/api/addReview/${productId}`, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                productId: productId,
                 title: title,
                 content: content,
                 star: selectedRating,
-                username: 'currentUsername' // 현재 로그인한 사용자의 이름
+                username: 'currentUsername'
             })
         }).then(response => {
             if (!response.ok) {
@@ -89,11 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return response.json();
         }).then(data => {
-            addReviewToPage(title, content, selectedRating, 'currentUsername');
-            // 입력 필드 초기화
-            document.getElementById('review-title').value = '';
-            document.getElementById('review-content').value = '';
-            updateStars(0);
+            loadProductDetails(productId); // 상품 상세 정보 및 리뷰 갱신
         }).catch(error => {
             console.error('Error:', error);
             alert('리뷰 제출 중 문제가 발생했습니다: ' + error.message);
