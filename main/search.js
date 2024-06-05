@@ -19,7 +19,7 @@ function renderResults(data, query) {
         imageElement.alt = item.itemName;
         imageElement.addEventListener('click', () => {
             // 이미지 클릭 시 상품 상세 페이지로 이동
-            window.location.href = `product.html?id=${item.id}`;
+            window.location.href = `Product.html?id=${item.id}`;
         });
 
         itemElement.appendChild(imageElement);
