@@ -1,11 +1,18 @@
+/* 기본 스타일 */
 body, html {
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
     background: #fff;
-    
+    animation: fadeIn 1s ease-in-out;
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 헤더 스타일 */
 header {
     display: flex;
     flex-direction: column;
@@ -13,19 +20,36 @@ header {
     justify-content: center;
     padding: 10px 50px;
     margin-top: 20px;
+    animation: slideDown 0.5s ease-in-out;
 }
 
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* 상단 메뉴 스타일 */
 .top-menu {
     width: 100%;
     height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: background-color 0.3s ease;
 }
 
-.top-menu a{
+.top-menu:hover {
+    background-color: #f8f8f8;
+}
+
+.top-menu a {
     text-decoration: none;
     color: black;
+    transition: color 0.3s ease;
+}
+
+.top-menu a:hover {
+    color: #007BFF;
 }
 
 .top-menu span {
@@ -33,12 +57,13 @@ header {
     font-family: Inter;
 }
 
-.search-container{
+/* 검색 컨테이너 스타일 */
+.search-container {
     margin-left: 140px;
     display: table;
 }
 
-.search-child{
+.search-child {
     display: table-cell;
     vertical-align: middle;
 }
@@ -48,6 +73,11 @@ header {
     padding: 8px;
     border: none;
     border-bottom: 1px solid #ccc;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.search-bar:focus {
+    border-bottom-color: #007BFF;
 }
 
 .search-icon {
@@ -56,13 +86,25 @@ header {
     height: 22px;
     align-self: center;
     margin-left: 10px;
+    transition: transform 0.3s ease;
 }
 
+.search-icon:hover {
+    transform: scale(1.2);
+}
+
+/* 메뉴 항목 스타일 */
 .menu-items {
     display: flex;
     justify-content: center;
     padding: 10px 0;
     margin-top: 10px;
+    animation: slideUp 0.5s ease-in-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .menu-items a {
@@ -70,8 +112,15 @@ header {
     text-decoration: none;
     color: black;
     font-family: Inter;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
+.menu-items a:hover {
+    color: #007BFF;
+    transform: translateY(-5px);
+}
+
+/* 로그인 영역 스타일 */
 .login-area {
     display: flex; 
     justify-content: center;
@@ -86,6 +135,12 @@ header {
     color: black;
     margin: 0 10px;
     width: 40px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.login-area a:hover {
+    color: #007BFF;
+    transform: scale(1.1);
 }
 
 .login-area img {
@@ -98,8 +153,8 @@ header {
     font-size: medium;
 }
 
-
-.page-name{
+/* 페이지 이름 및 현재 위치 스타일 */
+.page-name {
     text-align: center;
     font-size: 300%;
     font-weight: 100;
@@ -107,46 +162,68 @@ header {
     color: gray;
     margin-top: 0;
     margin-bottom: 0;
+    animation: fadeIn 1s ease-in-out;
 }
 
-.current-location{
+.current-location {
     text-align: center;
     font-weight: 100;
     font-family: Inter;
     color: gray;
     margin-top: 0;
+    animation: fadeIn 1s ease-in-out;
 }
 
-
+/* 제품 스타일 */
 .product {
     width: 200px;
     height: 270px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.product:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* 광고 스타일 */
 .ad {
     width: 1200px;
-    height: 500px
+    height: 500px;
+    animation: fadeIn 1s ease-in-out;
 }
-/**/
 
+/* 썸네일 리스트 스타일 */
 .thumbnail_list ul#theTrendList li {
     display: inline-block;
-    margin-right: 20px; /* 각 항목 사이의 간격을 조정할 수 있습니다 */
-    vertical-align: top; /* 세로 정렬을 맞추기 위해 상단 정렬로 설정합니다 */
+    margin-right: 20px; /* Adjust spacing between items */
+    vertical-align: top; /* Align items to the top */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.thumbnail_list ul#theTrendList li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
 
-
-/* Custom styles */
+/* 사용자 정의 스타일 */
 .thumbnail_list ul li .producta {
     font-family: "ProximaNova-Regular", "Noto Sans KR";
     color: #000;
     text-decoration: none;
 }
+
 .productimg {
     width: 224px;
     height: 316px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.productimg:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
 .producta, .productimg, input, button, select, textarea {
     vertical-align: middle;
 }
@@ -155,14 +232,12 @@ header {
     background-color: transparent;
 }
 
-
-/* User agent styles */
+/* 사용자 에이전트 스타일 */
 .producta:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
     text-decoration: underline;
 }
- 
 
 html {
     font-family: sans-serif;
@@ -170,13 +245,7 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
-/* User agent styles */
-.producta:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
+/* 리스트 스타일 */
 li, dl {
     margin: 0;
     padding: 0;
@@ -187,41 +256,9 @@ ul {
     list-style-type: disc;
 }
 
-html {
-    font-family: sans-serif;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-}
-
-/* .heart {
-
-    width: 18px;
-    height: 17px;
-   
-    background-image: url("/Users/kyw/Desktop/likebefore.png");
-    background-size: contain;
-    background-color: rgba(0, 0, 0, 0);
-    background-repeat: no-repeat;
-    border: none;
-    position: absolute;  
-    top: 10px; 
-    right: 10px;  
-    cursor: pointer; 
-}
-
-.heart.active {
-    width: 18px;
-    height: 17px;
-   
-    background-image: url("/Users/kyw/Desktop/likeafter.png");
-    background-size: contain;
-    background-color: rgba(0, 0, 0, 0);
-    background-repeat: no-repeat;
-    border: none;
-} */
-
+/* 공백 스타일 */
 .spacer {
-    height: 20px; /* 원하는 높이로 조정 가능 */
+    height: 20px; /* Adjust as needed */
 }
 
 .spacer1 {
@@ -231,29 +268,26 @@ html {
 .trend {
     display: flex;
     justify-content: center;
-
+    animation: fadeIn 1s ease-in-out;
 }
 
-
-
-
-
-
-
-
-/**/
-
-.info_1{
+/* 정보 스타일 */
+.info_1 {
     font-size: 16px;
+    animation: fadeIn 1s ease-in-out;
 }
-.info_2{
+
+.info_2 {
     font-size: 12px;
     color: grey;
+    animation: fadeIn 1s ease-in-out;
 }
+
+/* 푸터 스타일 */
 footer {
     flex-direction: row;
-    padding: 20px
-
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .footer-info {
@@ -261,10 +295,9 @@ footer {
     justify-content: center;
     align-items: center;
     width: 100%;
-
 }
 
-.footer-Customer-Service{
+.footer-Customer-Service {
     width: 200px;
     height: 80px;
     position: absolute;
@@ -272,18 +305,24 @@ footer {
     left: 12%;
 }
 
-.footer-button-box{
+.footer-button-box {
     cursor: pointer;
     width: 220px;
     height: 55px;
+    transition: transform 0.3s ease;
 }
 
-.footer-button-box  a{
+.footer-button-box a {
     text-decoration: none;
 }
 
-.footer-button-box  a  img{
+.footer-button-box a img {
     width: 93px;
     height: 42px;
     padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.footer-button-box:hover {
+    transform: scale(1.05);
 }
