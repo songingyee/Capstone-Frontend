@@ -14,13 +14,31 @@ function renderResults(data, query) {
         const itemElement = document.createElement('div');
         itemElement.classList.add('item');
 
-        itemElement.innerHTML = `
-            <img src="${item.image}" alt="${item.itemName}">
-            <h2>${item.itemName}</h2>
-            <p>Price: ${item.price}원</p>
-            <p>Company: ${item.company}</p>
-            <p>Size: ${item.size}</p>
-        `;
+        const imageElement = document.createElement('img');
+        imageElement.src = item.image;
+        imageElement.alt = item.itemName;
+        imageElement.addEventListener('click', () => {
+            // 이미지 클릭 시 상품 상세 페이지로 이동
+            window.location.href = `product.html?id=${item.id}`;
+        });
+
+        itemElement.appendChild(imageElement);
+
+        const nameElement = document.createElement('h2');
+        nameElement.textContent = item.itemName;
+        itemElement.appendChild(nameElement);
+
+        const priceElement = document.createElement('p');
+        priceElement.textContent = `${item.price}원`;
+        itemElement.appendChild(priceElement);
+
+        const companyElement = document.createElement('p');
+        companyElement.textContent = `${item.company}`;
+        itemElement.appendChild(companyElement);
+
+        const sizeElement = document.createElement('p');
+        sizeElement.textContent = `Size: ${item.size}`;
+        itemElement.appendChild(sizeElement);
 
         resultsContainer.appendChild(itemElement);
     });
