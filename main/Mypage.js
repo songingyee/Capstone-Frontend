@@ -1,18 +1,57 @@
+// 로그인 성공 후 memberId를 로컬 스토리지에 저장하는 예제
+document.getElementById('loginForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const loginData = {
+        username: formData.get('username'),
+        password: formData.get('password'),
+    };
+
+    fetch('http://localhost:8080/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // 로그인 성공 시 memberId를 로컬 스토리지에 저장
+            localStorage.setItem('memberId', data.memberId);
+            window.location.href = 'mypage.html';
+        } else {
+            // 로그인 실패 시 처리
+            alert('로그인 실패: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   // 쿠키에서 세션 ID 가져오기
   const sessionId = getCookie('sessionId');
 
-    if (!sessionId) {
+  if (!sessionId) {
     // 세션 ID가 없으면 
     window.location.href = 'login.html';
     return;
   }
 
+  // 로컬 스토리지에서 memberId 가져오기
+  const memberId = localStorage.getItem('memberId');
+  if (!memberId) {
+    // memberId가 없으면 
+    window.location.href = 'login.html';
+    return;
+  }
 
   // API에서 데이터 가져오기
-  fetch('http://localhost:8080/api/mypage/{memberID}', {
+  fetch(`http://localhost:8080/api/mypage/${memberId}`, {
       credentials: 'include'
-})
+  })
   .then(response => response.json())
   .then(data => {
       // My Information 렌더링
@@ -67,3 +106,4 @@ function getCookie(name) {
   const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
   return cookieValue ? cookieValue.pop() : '';
 }
+
