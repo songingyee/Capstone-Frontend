@@ -4,7 +4,7 @@ let totalPages = 4;
 
 async function loadProducts(page) {
     try {
-        const response = await fetch('http://localhost:8080/api/women?page=?');
+        const response = await fetch(`http://localhost:8080/api/women?page=${page}`);
         const data = await response.json();
 
         const productList = document.getElementById('productList');
@@ -16,7 +16,7 @@ async function loadProducts(page) {
 
             listItem.innerHTML = `
                 <div class="img" style="position: relative;">
-                    <button type="button" name="button" class="heart" onclick="toggleButton('${listItem.id}', this)"></button>
+                    <button type="button" name="button" class="heart" onclick="handleToggleClick('${listItem.id}', this)"></button>
                     <a href="product.html?productId=${product.id}" class="producta">
                         <img src="${product.image}" alt="Product Image" class="productimg">
                 </div>
@@ -99,15 +99,28 @@ function toggleHeart(button, isActive) {
     }
 }
 
+function handleToggleClick(productId, button) {
+    // 세션 유효성 확인
+    fetch(`http://localhost:8080/session-check`, {
+        method: 'GET',
+        credentials: 'include'
+    })
+    .then(response => {
+        if (response.ok) {
+            // 세션이 유효하면 토글 동작 수행
+            toggleButton(productId, button);
+        } else {
+            // 세션이 유효하지 않으면 로그인 페이지로 리디렉션
+            window.location.href = 'login.html';
+        }
+    })
+    .catch(error => {
+        console.error('Session check failed:', error);
+        window.location.href = 'login.html'; // 에러 발생 시 로그인 페이지로 리디렉션
+    });
+}
+
 function toggleButton(productId, button) {
-
-    // 로그인 확인 코드
-    // if (!isLoggedIn()) {
-    //     alert('로그인 후 이용해주세요.');
-    //     window.location.href = 'join.html';
-    //     return;
-    // }
-
     const productDiv = document.getElementById(productId);
     const productHTML = productDiv.innerHTML;
 
@@ -146,7 +159,6 @@ function loadButtonStates() {
         }
     }
 }
-
 
 window.onload = function() {
     loadProducts(currentPage);
